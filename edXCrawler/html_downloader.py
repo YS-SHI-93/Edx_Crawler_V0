@@ -1,4 +1,4 @@
-import urllib.request
+from selenium import webdriver
 #from bs4 import BeautifulSoup
 
 class HtmlDownloader(object):
@@ -15,8 +15,9 @@ class HtmlDownloader(object):
         if url is None:
             return None
         
-        req = urllib.request.Request(url, headers=hdr)
-        
-        response = urllib.request.urlopen(req)
+        driver = webdriver.Chrome(executable_path='C:\\~ANU\\edx_Crawler\\Edx_Crawler_V0\\edXCrawler\\phantomjs-2.1.1-windows\\bin\\chromedriver')
+        driver.get(url)
+        html = driver.page_source
+        return html
         
         

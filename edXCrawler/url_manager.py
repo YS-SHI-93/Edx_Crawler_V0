@@ -5,6 +5,8 @@ class UrlManager(object):
         self.new_urls = set()
         self.old_urls = set()
         
+        
+    # 添加一个url到未读url列表    
     def add_new_url(self, url):
         if url is None:
             return
@@ -22,7 +24,7 @@ class UrlManager(object):
         for url in urls:
             self.add_new_url(url)
             
-            
+    # 返回是否有未读url        
     def has_new_url(self):
         return len(self.new_urls)!=0 
 #    not zero --> we have url to crawl 
@@ -31,5 +33,5 @@ class UrlManager(object):
     def get_new_url(self):
         new_url=self.new_urls.pop()
 #        pop() == get and remove 
-        self.old_urls.add(new_url)
+        self.old_urls.add(new_url) # 添加这个url到已读url列表中
         return new_url
