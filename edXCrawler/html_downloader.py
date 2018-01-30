@@ -22,7 +22,7 @@ class HtmlDownloader(object):
 
     def download(self, url):
         
-        SCROLL_PAUSE_TIME = 3
+        SCROLL_PAUSE_TIME = 1.5
         
         if url is None:
             return None

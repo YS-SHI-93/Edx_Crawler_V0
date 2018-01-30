@@ -12,67 +12,70 @@ class HtmlOutputer(object):
 
     # 输出到html文件中
     def output_html(self):
-        fout = open(r'output.html','w')
-
-        fout.write('<html>')
-        fout.write('<body>')
-        fout.write('<table style="width:100%">')
-
-        fout.write('<tr>')
-        fout.write('<th>')
-        fout.write('url')
-        fout.write('<\th>')
-        
-        fout.write('<th>')
-        fout.write('Length')
-        fout.write('<\th>')
-        
-        fout.write('<th>')
-        fout.write('Effort')
-        fout.write('<\th>')
-        
-        fout.write('<th>')
-        fout.write('Price')
-        fout.write('<\th>')
-        
-        fout.write('<th>')
-        fout.write('Institution')
-        fout.write('<\th>')
-        
-        fout.write('<th>')
-        fout.write('Subject')
-        fout.write('<\th>')
-        
-        fout.write('<th>')
-        fout.write('Level')
-        fout.write('<\th>')
-        
-        fout.write('<th>')
-        fout.write('Languages')
-        fout.write('<\th>')
-
-        fout.write('<th>')
-        fout.write('Video Transcripts')
-        fout.write('<\th>')
-        
-        for data in self.datas:
+        import io
+        with io.open("output.html", "w", encoding="utf-8") as f:
             
-            fout.write('<tr>')
-            fout.write('<td>%s</td>' % data['url'])
-            fout.write('<td>%s</td>' % data['Length'])
-            fout.write('<td>%s</td>' % data['Effort'])
-            fout.write('<td>%s</td>' % data['Price'])
-            fout.write('<td>%s</td>' % data['Institution'])
-            fout.write('<td>%s</td>' % data['Subject'])
-            fout.write('<td>%s</td>' % data['Level'])
-            fout.write('<td>%s</td>' % data['Languages'])
-            fout.write('<td>%s</td>' % data['Video Transcripts'])
+#        f = open(r'output.html','w')
+
+            f.write('<html>')
+            f.write('<body>')
+            f.write('<table style="width:100%">')
+    
+            f.write('<tr>')
+            f.write('<th>')
+            f.write('url')
+            f.write('<\th>')
             
-            fout.write('</tr>')
-
-
-        fout.write('</table>')
-        fout.write('</body>')
-        fout.write('</html>')
-
-        fout.close()
+            f.write('<th>')
+            f.write('Length')
+            f.write('<\th>')
+            
+            f.write('<th>')
+            f.write('Effort')
+            f.write('<\th>')
+            
+            f.write('<th>')
+            f.write('Price')
+            f.write('<\th>')
+            
+            f.write('<th>')
+            f.write('Institution')
+            f.write('<\th>')
+            
+            f.write('<th>')
+            f.write('Subject')
+            f.write('<\th>')
+            
+            f.write('<th>')
+            f.write('Level')
+            f.write('<\th>')
+            
+            f.write('<th>')
+            f.write('Languages')
+            f.write('<\th>')
+    
+            f.write('<th>')
+            f.write('Video Transcripts')
+            f.write('<\th>')
+            
+            for data in self.datas:
+                
+                f.write('<tr>')
+                f.write('<td>%s</td>' % data['url'])
+                f.write('<td>%s</td>' % data['Length'])
+                f.write('<td>%s</td>' % data['Effort'])
+                f.write('<td>%s</td>' % data['Price'])
+                f.write('<td>%s</td>' % data['Institution'])
+                f.write('<td>%s</td>' % data['Subject'])
+                f.write('<td>%s</td>' % data['Level'])
+                f.write('<td>%s</td>' % data['Languages'])
+                f.write('<td>%s</td>' % data['Video Transcripts'])
+                
+                f.write('</tr>')
+    
+    
+            f.write('</table>')
+            f.write('</body>')
+            f.write('</html>')
+    
+            f.close()
