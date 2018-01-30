@@ -11,8 +11,17 @@ class HtmlParser(object):
 
         # 获取关键词
         cards = soup.find_all('span', class_='block-list__desc')
-        for card in cards:
-            res_data['information'] = card.get_text()
+        res_data['Length'] = cards[0].get_text().strip()
+        res_data['Effort'] = cards[1].get_text().strip()
+        res_data['Price'] = cards[2].get_text().strip()
+        res_data['Institution'] = cards[3].get_text().strip()
+        res_data['Subject'] = cards[4].get_text().strip()
+        res_data['Level'] = cards[5].get_text().strip()
+        res_data['Languages'] = cards[6].get_text().strip()
+        res_data['Video Transcripts'] = cards[7].get_text().strip()
+
+#        for card in cards:
+#            res_data['information'] = card.get_text()
 
 #        # 获取简介
 #        summary_node = soup.find('div', class_ = 'lemma-summary')
