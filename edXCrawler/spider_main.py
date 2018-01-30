@@ -46,13 +46,20 @@ class SpiderMain(object):
         while self.urls.has_new_url():
             try:
                 new_url = self.urls.get_new_url()
+                
                 print (count, new_url)
                 print ('######################################')
     
-                html_cont = self.downloader.download(new_url) # 根据url下载网页
+                course_html_cont = self.downloader.download(new_url) # 根据url下载网页
+                
+                print (" ---!--- ")
+                
+                print (str(new_url)+" has been downloaded")
+                
 #                course_urls = self.recorder.get_root_urls(html_cont)
                 
-                new_data = self.parser.parse(new_url, html_cont)
+                new_data = self.parser.parse(new_url, course_html_cont)
+                
                 
 #               self.urls.add_new_urls(new_urls)
                 self.outputer.collect_data(new_data)

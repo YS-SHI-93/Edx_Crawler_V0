@@ -19,7 +19,7 @@ class CourseRecorder(object):
         links = soup.find_all("a", class_="course-link")
         
         for link in links:
-            print('we are crawling: ' + str(link['href'].encode('utf-8')))
+            print('We got: ' + str(link['href'].encode('utf-8')))
             new_full_url = link['href'].encode('utf-8') # 获取url
 #            new_full_url = 'https://www.edx.org'+new_url # 拼接url
             new_urls.add(new_full_url)

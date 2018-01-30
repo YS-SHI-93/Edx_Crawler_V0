@@ -21,6 +21,12 @@ class HtmlDownloader(object):
         
         driver = webdriver.Chrome(executable_path='C:\\~ANU\\edx_Crawler\\Edx_Crawler_V0\\edXCrawler\\phantomjs-2.1.1-windows\\bin\\chromedriver')
         driver.get(url)
+        
+        print(' ')
+        print('we are downloading: '+str(url))
+        print(' ')
+        
+        
         try:
             html = driver.page_source
         
@@ -38,6 +44,7 @@ class HtmlDownloader(object):
                     )
 
             driver.close()
+            
         finally:
             driver.quit()
         return html
