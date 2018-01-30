@@ -18,6 +18,19 @@ class HtmlDownloader(object):
         driver = webdriver.Chrome(executable_path='C:\\~ANU\\edx_Crawler\\Edx_Crawler_V0\\edXCrawler\\phantomjs-2.1.1-windows\\bin\\chromedriver')
         driver.get(url)
         html = driver.page_source
+        
+        
+#        soup = BeautifulSoup(
+#        html,
+#        'html.parser',
+#        from_encoding='uft-8'
+#        )
+#        
+#        print (soup.prettify())
+#        
+#        
+        
+        driver.close()
         return html
         
         
