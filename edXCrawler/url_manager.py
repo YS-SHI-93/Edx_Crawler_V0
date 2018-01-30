@@ -32,6 +32,6 @@ class UrlManager(object):
 #          get a new url from the list
     def get_new_url(self):
         new_url=self.new_urls.pop()
-#        pop() == get and remove 
+#        pop() => get and remove 
         self.old_urls.add(new_url) # 添加这个url到已读url列表中
         return new_url

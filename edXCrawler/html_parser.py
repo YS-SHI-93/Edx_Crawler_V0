@@ -1,20 +1,8 @@
 from bs4 import BeautifulSoup
-import re
+
 
 class HtmlParser(object):
     
-
-    # 获取其中的url
-    def __get_new_urls(self,page_url, soup):
-        new_urls = set()
-        links = soup.find_all("a", class_="course-link")
-        for link in links:
-            print(link['href'].encode('utf-8'))
-            new_url = link['href'].encode('utf-8') # 获取url
-            new_full_url = 'https://www.edx.org'+new_url # 拼接url
-            new_urls.add(new_full_url)
-        return new_urls
-
     # 获取其中的内容（关键词，简介）
     def __get_new_data(self,page_url,soup):
         res_data = {}
@@ -34,12 +22,16 @@ class HtmlParser(object):
 
     # 解析htnl字符串
     def parse(self,page_url,html_cont):
-        if page_url is None or html_cont is None:
+        if  html_cont is None:
             return
 
         soup = BeautifulSoup(html_cont, 'html.parser', from_encoding='utf-8')
-        new_urls = self.__get_new_urls(page_url, soup)
+#        new_urls = self.__get_new_urls(page_url, soup)
         new_data = self.__get_new_data(page_url, soup)
+        
+        print(" ")
+        
+        print("our current new data is: " + str(new_data))
 
         
-        return new_urls, new_data
+        return new_data

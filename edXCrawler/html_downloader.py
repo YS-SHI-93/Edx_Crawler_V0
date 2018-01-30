@@ -1,5 +1,9 @@
 from selenium import webdriver
 #from bs4 import BeautifulSoup
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 class HtmlDownloader(object):
     
@@ -17,7 +21,8 @@ class HtmlDownloader(object):
         
         driver = webdriver.Chrome(executable_path='C:\\~ANU\\edx_Crawler\\Edx_Crawler_V0\\edXCrawler\\phantomjs-2.1.1-windows\\bin\\chromedriver')
         driver.get(url)
-        html = driver.page_source
+        try:
+            html = driver.page_source
         
         
 #        soup = BeautifulSoup(
@@ -27,10 +32,14 @@ class HtmlDownloader(object):
 #        )
 #        
 #        print (soup.prettify())
-#        
-#        
-        
-        driver.close()
+           
+            element = WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.ID, "footer-edx-v3"))
+                    )
+
+            driver.close()
+        finally:
+            driver.quit()
         return html
         
         
