@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 
 class CourseRecorder(object):
     
-#    Todo: 获取root页面其中的所有的url
+#    Todo: Obtain all the urls from the root
     
     def get_root_urls(self, soup):
         new_urls = set()
@@ -20,8 +20,8 @@ class CourseRecorder(object):
         
         for link in links:
             print('We got: ' + str(link['href']))
-            new_full_url = link['href'] # 获取url
-#            new_full_url = 'https://www.edx.org'+new_url # 拼接url
+            new_full_url = link['href'] # Get URL
+#            new_full_url = 'https://www.edx.org'+new_url # CONCAT URLS
             new_urls.add(new_full_url)
         
         print ('our whole package is: '+ str(new_urls))

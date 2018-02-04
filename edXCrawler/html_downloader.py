@@ -36,7 +36,7 @@ class HtmlDownloader(object):
         
         
         try:
-            if url == 'https://www.edx.org/course/?course=all&availability=current&language=English':
+            if url == 'https://www.edx.org/course?course=all':
                 # Get scroll height
                 last_height = driver.execute_script("return document.body.scrollHeight")
                 

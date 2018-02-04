@@ -1,16 +1,16 @@
-# 数据输出器
+# Outputer
 class HtmlOutputer(object):
 
     def __init__(self):
         self.datas = list()
 
-    # 添加数据到列表中
+    # collect data from the crawled data variable
     def collect_data(self, data):
         if data is None:
             return
         self.datas.append(data)
 
-    # 输出到html文件中
+    # write into output.html
     def output_html(self):
         import io
         with io.open("output.html", "w", encoding="utf-8") as f:
@@ -58,6 +58,14 @@ class HtmlOutputer(object):
             f.write('Video Transcripts')
             f.write('<\th>')
             
+            f.write('<th>')
+            f.write('Type')
+            f.write('<\th>')
+            
+            f.write('<th>')
+            f.write('Flags')
+            f.write('<\th>')
+            
             for data in self.datas:
                 
                 f.write('<tr>')
@@ -70,7 +78,8 @@ class HtmlOutputer(object):
                 f.write('<td>%s</td>' % data['Level'])
                 f.write('<td>%s</td>' % data['Languages'])
                 f.write('<td>%s</td>' % data['Video Transcripts'])
-                
+                f.write('<td>%s</td>' % data['Type'])
+                f.write('<td>%s</td>' % data['Flag'])
                 f.write('</tr>')
     
     
