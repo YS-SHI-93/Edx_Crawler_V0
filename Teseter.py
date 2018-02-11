@@ -224,9 +224,26 @@ df.to_excel('test_output_data.xlsx', sheet_name='Sheet1')
 df['Price_Number'].describe(percentiles=[.05, .25, .75, .95])
 
 plotting.scatter_matrix(df[['Price_Number', 'length_parsed_average']], alpha=0.2, figsize=(6, 6))
+plotting.scatter_matrix(df[['Price_Number', 'effort_parsed_average']], alpha=0.2, figsize=(6, 6))
 
 df['effort_parsed_average'].mean()
+df['effort_parsed_average'].std()
+S=pd.Series(df['effort_parsed_average'])
+S[~((S-S.mean()).abs()>3*S.std())].mean()
+
+S=pd.Series(df['Price_Number'])
+df['Price_Number_drop_outliers']=S[~((S-S.mean()).abs()>3*S.std())]
+
+
+
 df['length_parsed_average'].mean()
+df['length_parsed_average'].std()
+S2=pd.Series(df['length_parsed_average'])
+S2[~((S2-S2.mean()).abs()>3*S2.std())].mean()
+
+S2=pd.Series(df['length_parsed_average'])
+df['length_drop_outliers']=S2[~((S2-S2.mean()).abs()>3*S2.std())]
+df
 
 #print(df.head())
 #
