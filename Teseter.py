@@ -8,6 +8,8 @@ import pandas as pd
 import re
 import numpy as ny
 from scipy import stats
+import pandas.plotting as plotting
+import matplotlib.pyplot as plt
 
 file_location = 'C:\\~ANU\\edx_Crawler\\Edx_Crawler_V0\\edXCrawler\\Data_analysis\\Data.xlsx'
     
@@ -129,7 +131,7 @@ def parse_efforts(df):
                     if int(match)>20:
                         match=int(match)/DEFAULT_WEEK
                     
-                    l.append([match])
+                    l.append([int(match)])
                 else:
                     #    effort_ir5 = "na"
                     l.append(ny.nan)
@@ -177,7 +179,8 @@ for x in source_col:
     
 df['length_parsed_min'] = length_min
 df['length_parsed_max'] = length_max
-
+df['length_parsed_min'].convert_objects(convert_numeric=True)
+df['length_parsed_max'].convert_objects(convert_numeric=True)
 #print(df[['length_parsed_min','length_parsed_max']] )
 df['length_parsed_average'] = df[['length_parsed_min', 'length_parsed_max']].apply(ny.mean, axis=1)
 
@@ -208,16 +211,27 @@ for x in source_col:
         
 df['effort_parsed_min'] = effort_min
 df['effort_parsed_max'] = effort_max
-
+df['effort_parsed_min'].convert_objects(convert_numeric=True)
+df['effort_parsed_max'].convert_objects(convert_numeric=True)
 df['effort_parsed_average'] = df[['effort_parsed_min', 'effort_parsed_max']].apply(ny.mean, axis=1)
 
 df['Price_Number'].convert_objects(convert_numeric=True)
 
+df.to_excel('test_output_data.xlsx', sheet_name='Sheet1')
+
+
+#price stat
+df['Price_Number'].describe(percentiles=[.05, .25, .75, .95])
+
+plotting.scatter_matrix(df[['Price_Number', 'length_parsed_average']], alpha=0.2, figsize=(6, 6))
+
+df['effort_parsed_average'].mean()
+df['length_parsed_average'].mean()
 
 #print(df.head())
-
-Intermediate_price = df[df['Level'] == 'Intermediate']['Price_Number']
-Introductory_price = df[df['Level'] == 'Introductory']['Price_Number']
-stats.ttest_ind(Intermediate_price, Introductory_price, nan_policy ='omit')
+#
+#Intermediate_price = df[df['Level'] == 'Intermediate']['Price_Number']
+#Introductory_price = df[df['Level'] == 'Introductory']['Price_Number']
+#stats.ttest_ind(Intermediate_price, Introductory_price, nan_policy ='omit')
 
 
