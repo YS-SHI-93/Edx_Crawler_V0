@@ -10,6 +10,11 @@ import numpy as ny
 from scipy import stats
 import pandas.plotting as plotting
 import matplotlib.pyplot as plt
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+
+from statsmodels.sandbox.regression.predstd import wls_prediction_std
+
 
 file_location = 'C:\\~ANU\\edx_Crawler\\Edx_Crawler_V0\\edXCrawler\\Data_analysis\\Data.xlsx'
     
@@ -209,6 +214,10 @@ for x in source_col:
         effort_min.append(ny.nan)
         effort_max.append(ny.nan)
         
+        
+        
+        
+
 df['effort_parsed_min'] = effort_min
 df['effort_parsed_max'] = effort_max
 df['effort_parsed_min'].convert_objects(convert_numeric=True)
@@ -217,6 +226,14 @@ df['effort_parsed_average'] = df[['effort_parsed_min', 'effort_parsed_max']].app
 
 df['Price_Number'].convert_objects(convert_numeric=True)
 
+#pandas.factorize
+
+df['Institution_factorised']= pd.factorize(df['Institution'], na_sentinel=ny.nan)
+#df.boxplot(column='Price_Number', by =['Level'],showmeans=True,,return_type='dict')
+
+
+
+'''
 df.to_excel('test_output_data.xlsx', sheet_name='Sheet1')
 
 
@@ -243,12 +260,25 @@ S2[~((S2-S2.mean()).abs()>3*S2.std())].mean()
 
 S2=pd.Series(df['length_parsed_average'])
 df['length_drop_outliers']=S2[~((S2-S2.mean()).abs()>3*S2.std())]
-df
+'''
+formula='Price_Number ~ Institution+Level+Subject+Languages'
+
+
 
 #print(df.head())
 #
-#Intermediate_price = df[df['Level'] == 'Intermediate']['Price_Number']
-#Introductory_price = df[df['Level'] == 'Introductory']['Price_Number']
-#stats.ttest_ind(Intermediate_price, Introductory_price, nan_policy ='omit')
+Introductory_price = df[df['Level'] == 'Introductory']['Price_Number']
+Intermediate_price = df[df['Level'] == 'Intermediate']['Price_Number']
+Advanced_price = df[df['Level'] == 'Advanced']['Price_Number']
+
+stats.ttest_ind(Introductory_price, Intermediate_price, nan_policy ='omit')
+stats.ttest_ind(Introductory_price, Advanced_price, nan_policy ='omit')
+stats.ttest_ind(Intermediate_price, Advanced_price, nan_policy ='omit')
 
 
+stats.ttest_ind(Intermediate_price,Introductory_price , nan_policy ='omit')
+df['Languages'].replace('English, English','English',inplace=True)
+
+df['Languages'].replace('Simplified Chinese, 中文','中文',inplace=True)
+df['Languages'].replace('Simplified Chinese','中文',inplace=True)
+df['Languages'].replace('中文, Simplified Chinese','中文',inplace=True)
