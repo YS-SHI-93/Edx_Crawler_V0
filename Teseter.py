@@ -228,7 +228,7 @@ df['Price_Number'].convert_objects(convert_numeric=True)
 
 #pandas.factorize
 
-df['Institution_factorised']= pd.factorize(df['Institution'], na_sentinel=ny.nan)
+#df['Institution_factorised']= pd.factorize(df['Institution'], na_sentinel=ny.nan)
 #df.boxplot(column='Price_Number', by =['Level'],showmeans=True,,return_type='dict')
 
 
